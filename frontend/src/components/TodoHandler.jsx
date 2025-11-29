@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TodoLists from './TodoLists';
 import useTaskStore from '../zustand/store.js'
+import { IoMdAddCircleOutline } from "react-icons/io";
+
 
 const TodoHandler = () => {
     const {  setTaskCount } = useTaskStore();
@@ -78,11 +80,11 @@ const TodoHandler = () => {
         />
         <button 
         type="submit"
-        className={` w-[100px] h-[40px] rounded-[10px] 
+        className={`flex flex-row gap-[10px] justify-center items-center w-[100px] h-[40px] rounded-[10px] 
         ${task.length>0?"bg-green-500 font-medium":"bg-red-500 text-white font-medium"}
          `}
         
-        >Add</button>
+        >Add <IoMdAddCircleOutline /></button>
       </div>
       </form>
 
