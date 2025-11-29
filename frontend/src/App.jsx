@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TodoLists from './components/TodoLists';
 
 const App = () => {
   const [task, setTask] = useState("");
@@ -70,21 +71,15 @@ const App = () => {
           value={task}
           onChange={handleTask} 
         />
-        <button type="submit">Add</button>
+        <button 
+        type="submit"
+        className='bg-green-400 w-[100px] h-[60px] '
+        
+        >Add</button>
       </form>
 
       {/* List tasks */}
-      <ul>
-  {todoList.map((item) => (
-    <li key={item.id}>
-      {item.task}
-
-      <button onClick={() => deleteTask(item.id)}>
-        delete
-      </button>
-    </li>
-  ))}
-</ul>
+      <TodoLists todoList={todoList} deleteTask={deleteTask}/>
 
     </div>
   );
