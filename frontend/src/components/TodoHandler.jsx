@@ -5,6 +5,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 
 
 const TodoHandler = () => {
+    const [pop,setPop]=useState(false);
     const {  setTaskCount } = useTaskStore();
   const [task, setTask] = useState("");
   const [todoList, setTodoList] = useState([]);
@@ -13,9 +14,17 @@ const TodoHandler = () => {
     setTask(e.target.value);
   }
 
+ setTimeout(()=>{
+  setPop(false)
+ },2000)
+
   // 👉 Add task
   async function handleAddTask(e) {
     e.preventDefault();
+    if(task.length>0){
+        setPop(true);
+    }
+    
 
     if (!task.trim()) return;
 
@@ -38,6 +47,8 @@ const TodoHandler = () => {
     }
   }
 
+ 
+
   // 👉 Fetch tasks from backend
   async function fetchTasks() {
     try {
@@ -50,6 +61,8 @@ const TodoHandler = () => {
     }
   }
   async function deleteTask(id) {
+
+    setPop(true)
   try {
     await fetch(`http://localhost:3000/task/${id}`, {
       method: "DELETE"
@@ -61,6 +74,11 @@ const TodoHandler = () => {
   }
 }
 
+function handleKeyPress(e){
+  if(e.key==="Enter"){
+    handleAddTask();
+  }
+}
 
   // 👉 Load tasks on page load
   useEffect(() => {
@@ -77,6 +95,8 @@ const TodoHandler = () => {
           placeholder="Enter your note" 
           value={task}
           onChange={handleTask} 
+          onKeyDown={handleKeyPress}
+          
         />
         <button 
         type="submit"
@@ -89,7 +109,7 @@ const TodoHandler = () => {
       </form>
 
       
-      <TodoLists todoList={todoList} deleteTask={deleteTask}/>
+      <TodoLists todoList={todoList} deleteTask={deleteTask} pop={pop}/>
 
     </div>
   );

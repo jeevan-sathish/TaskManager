@@ -3,13 +3,19 @@ import { TbPointFilled } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 
 import EmptyList from "./EmptyList.jsx";
+import PopUp from "./PopUp.jsx";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const TodoLists = ({ todoList, deleteTask }) => {
+const TodoLists = ({ todoList, deleteTask,pop }) => {
+  
+
+   
  
 
   return (
-    <div className="w-full h-[560px] flex flex-col items-center p-5 gap-8 bg-white overflow-y-auto">
-      
+    <div className="w-full h-[560px] flex flex-col items-center p-5 gap-8 bg-white overflow-y-auto realtive">
+      {pop&&<PopUp  todoList={todoList} />}
       {/* If no tasks → show EmptyList */}
       {todoList.length === 0 ? (
         <EmptyList />
