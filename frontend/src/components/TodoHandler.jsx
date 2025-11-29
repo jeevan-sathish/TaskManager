@@ -16,7 +16,7 @@ const TodoHandler = () => {
 
  setTimeout(()=>{
   setPop(false)
- },2000)
+ },5000)
 
   // 👉 Add task
   async function handleAddTask(e) {
